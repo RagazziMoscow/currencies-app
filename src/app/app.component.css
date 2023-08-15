@@ -1,0 +1,12 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-sidenav {
+  width: 300px;
+  padding: 0 20px;
+}
+
+.example-container {
+  height: 100vh;
+}

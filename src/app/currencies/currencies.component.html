@@ -1,0 +1,56 @@
+<div class="currencies">
+  <form class="example-form">
+    <mat-grid-list cols="2" gutterSize="20" rowHeight="200">
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput [formControl]="leftCurrencyControl" [matAutocomplete]="autoLeft">
+          <mat-autocomplete #autoLeft="matAutocomplete" [displayWith]="currencyGetter" (optionSelected)="setExchangeRate()">
+            <mat-option *ngFor="let option of leftFilteredCurrencies | async" [value]="option">
+              <div class="mat-typography">
+                <span>{{option.name}}</span><br>
+                <span class="mat-subtitle-2">{{option.code}}</span>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+          <button *ngIf="leftCurrencyControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="leftCurrencyControl.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input type="text" matInput [formControl]="rightCurrencyControl" [matAutocomplete]="autoRight">
+          <mat-autocomplete #autoRight="matAutocomplete" [displayWith]="currencyGetter" (optionSelected)="setExchangeRate()">
+            <mat-option *ngFor="let option of rightFilteredCurrencies | async" [value]="option">
+              <div class="mat-typography">
+                <span>{{option.name}}</span><br>
+                <span class="mat-subtitle-2">{{option.code}}</span>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+          <button *ngIf="rightCurrencyControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="rightCurrencyControl.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="leftQuantityControl" (blur)="onLeftQuantityChanged()">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+
+        <mat-form-field class="example-full-width">
+          <input matInput [formControl]="rightQuantityControl" (blur)="onRightQuantityChanged()">
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <div class="swap-panel">
+      <a aria-label="swap" (click)="swap()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="sync_alt"></mat-icon>
+      </a>
+    </div>
+  </form>
+</div>
